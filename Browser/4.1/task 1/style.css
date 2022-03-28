@@ -1,0 +1,72 @@
+
+body{
+    background-color: rgb(194, 194, 194);
+    margin: 0px 0px;
+    padding: 0px;
+}
+
+.wrapper{
+    position: fixed;
+    top: 0px;  
+    bottom: 0px;  
+    right: 0px;
+    left: 0px;
+    height: auto;
+    width: auto;
+    background-color: rgba(194, 194, 194, 0.24);
+    display: none;
+}
+
+
+.btn_text{
+    font-size: 24px;
+    margin: 15px 8px;
+}
+
+.but-pop-up{
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid black;
+    padding: 5px;
+    margin-left: 8px;
+    background-color: white;
+}
+.btn{
+
+}
+.modal_headText{
+    font-size: 20px;
+}
+
+.modal_inputText{
+    font-size: 15px;
+    margin: 15px 0px;
+}
+
+.popup{
+    width: 200px;
+    height: auto;
+    position: relative;
+    margin: 0 auto;
+    padding: 15px;
+    top: 100px;
+    background-color: white;
+    display: flex;
+}
+
+#modal{
+    display: none;
+}
+
+#modal:checked ~ .wrapper{
+    display: block;
+}
+.btn_modal{
+    color: black;
+    font-size: 20px;
+    padding: 8px 15px 8px 0px;
+    cursor: pointer;
+}
+.pop-up-content{
+
+}
