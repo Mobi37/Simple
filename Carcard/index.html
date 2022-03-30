@@ -15,7 +15,7 @@
             <div class="btn_table">
 
                 <button type="button" value="addCar" class="btn btn-success" >Добавить</button>
-                <button type="button" value="removeCars" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Удалить</button>
+                <button type="button" value="confirmremove" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Удалить</button>
                 <button type="button" value="changeCar" class="btn btn-primary">Редактировать</button>
  
             </div>
@@ -33,7 +33,6 @@
             </div>
         </div>
 
-
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -49,7 +48,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" value="removeCar" class="btn btn-primary" data-dismiss="modal">Save changes</button>
         </div>
       </div>
     </div>
