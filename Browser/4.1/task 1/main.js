@@ -8,7 +8,6 @@ document.onkeydown = (eval) => {
 
     modal.addEventListener("change", () =>{
         if(this.modal.checked == true){
-            document.getElementsByClassName("modal_headText")[0].innerHTML = message;
             document.getElementsByClassName("modal_inputText")[0].focus();
         }
     })

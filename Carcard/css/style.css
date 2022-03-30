@@ -1,0 +1,32 @@
+body{
+    padding: 0px;
+    margin: 0px;
+}
+
+.cars_table{
+    width: 550px;
+    padding: 10px;
+}
+
+.car_block{
+    background-color: #e6e6e6;
+    padding: 10px 10px;
+}
+
+.btn_table button{
+
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+.cars_info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.action{
+    background-color: rgb(148, 195, 255);
+}
+.table_lines{
+    cursor: pointer;
+}
