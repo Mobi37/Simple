@@ -82,7 +82,7 @@ function addCar(){
     newcars = document.getElementsByClassName("js-newcars")
     let car = {
         name: String(newcars[0].value),
-        data: newcars[1].value.slice(0,4),
+        data: newcars[1].value,
         broken: Boolean(newcars[2].checked), 
         price: Number(newcars[3].value)
     }
@@ -106,10 +106,10 @@ function changeconfirm(){
         for (let i = 0; i < reworkcars.length; i+=3) {
             reworkcars[i].value = remorkcarinfo[i]
         }
-        reworkcars[1].value = remorkcarinfo[1]+"-01-01";
+        reworkcars[1].value = remorkcarinfo[1];
         reworkcars[2].checked = Boolean(remorkcarinfo[2]);
     }else{
-        alert("Выберите машину")
+        alert("Выберите машину");
     }
 
 
@@ -118,7 +118,7 @@ function changeconfirm(){
 function changeCar(){
     let changeCars = {
         name: String(reworkcars[0].value),
-        data: reworkcars[1].value.slice(0,4),
+        data: reworkcars[1].value,
         broken: Boolean(reworkcars[2].checked), 
         price: Number(reworkcars[3].value)
     }
