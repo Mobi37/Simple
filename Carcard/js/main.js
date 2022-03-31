@@ -90,18 +90,28 @@ function addCar(){
         newcars[[i]].value = "";
         
     }
-    localStorage.setItem( String( Number(storageKey[(storageKey.sort()).length-1])+1 ) , JSON.stringify(car) );
+    if(storageKey.length == 0){
+        localStorage.setItem( "0" , JSON.stringify(car) );
+    }else{
+        localStorage.setItem( String( Number(storageKey[(storageKey.sort()).length-1])+1 ) , JSON.stringify(car) );
+    }
+    
     updateTable();
 }
 
 function changeconfirm(){
     reworkcars = document.getElementsByClassName("js-reworkcars")
-    let remorkcarinfo = Object.values( JSON.parse( localStorage.getItem(storageKey[positionTr-1])));
-    for (let i = 0; i < reworkcars.length; i+=3) {
-        reworkcars[i].value = remorkcarinfo[i]
+    if(positionTr !=0 & positionTr != undefined){
+        let remorkcarinfo = Object.values( JSON.parse( localStorage.getItem(storageKey[positionTr-1])));
+        for (let i = 0; i < reworkcars.length; i+=3) {
+            reworkcars[i].value = remorkcarinfo[i]
+        }
+        reworkcars[1].value = remorkcarinfo[1]+"-01-01";
+        reworkcars[2].checked = Boolean(remorkcarinfo[2]);
+    }else{
+        alert("Выберите машину")
     }
-    reworkcars[1].value = remorkcarinfo[1]+"-01-01";
-    reworkcars[2].checked = Boolean(remorkcarinfo[2]);
+
 
 }
 
@@ -112,7 +122,11 @@ function changeCar(){
         broken: Boolean(reworkcars[2].checked), 
         price: Number(reworkcars[3].value)
     }
-    localStorage.setItem( String(storageKey[positionTr-1]), JSON.stringify(changeCars))
+    if(positionTr !=0 & positionTr != undefined){
+        localStorage.setItem( String(storageKey[positionTr-1]), JSON.stringify(changeCars))
+    }
+
+    
     updateTable();
 }
 
