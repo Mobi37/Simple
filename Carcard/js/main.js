@@ -1,19 +1,11 @@
-let car_table = document.getElementsByClassName("car_table")[0];
 let car_btable = document.getElementsByClassName("car_tbody")[0];
 let buttons = document.querySelectorAll("button[value]");
-console.log(buttons)
 let deletecars = document.getElementsByClassName("js-cars")[0];
-let line;
 let positionTr;
 let storageKey = Object.keys(localStorage);
-
-let car = {
-    name: "hg4",
-    data: Date("2021"),
-    broken: true,
-}
-
-localStorage.setItem("4", JSON.stringify(car));
+let buttontable = [ ...car_btable.querySelectorAll("tr")];
+let newcars;
+let reworkcars;
 
 
 updateTable();
@@ -28,82 +20,100 @@ for (let i = 0; i < buttons.length; i++) {
             case "confirmremove":
                 confirmRemove();
                 return;
-        }
-    })
-}
-
-
-// buttons.addEventListener("click", (eval) =>{
-//     let button = eval.path[0].value;
-//     removeCar();
-// })
-
-let buttontable = [ ...car_btable.querySelectorAll("tr")];
-for (let i = 1; i < buttontable.length; i++) {
-        
-    buttontable[i].addEventListener("click", (eval) =>{
-        if( positionTr != undefined ){
-            buttontable[positionTr].classList.remove("action")
+            case "addCar":
+                addCar();
+                return;
+            case "changeconfirm":
+                changeconfirm();
+                return;
+            case "changeCar":
+                changeCar();
+                return;
                 
         }
-        positionTr = buttontable.indexOf(eval.path[1])
-        buttontable[positionTr].classList.add("action")
     })
-
 }
 
-// let cellsArray = [ ...car_btable.querySelectorAll('tr') ];
-// let listener = e => document.getElementById('output').innerHTML = cellsArray.indexOf(e.target); // Создать элемент вывода надо заранее
-
-// cellsArray.forEach( cell => cell.addEventListener( 'click', listener ) );
-
-
-
-// car_table.addEventListener( "click", (eval) => {
-
-
-
-//     if(line != undefined){
-//         line.classList.remove("action");
-//     }
-    
-//     line = eval.path[1];
-//     let count = car_btable.childNodes;
-//     console.log(count[0])
-//     if(line.tagName == "TR" & line.classList != "table_head"){
-//         line.classList.add("action");
-//     }else{
-//         line = undefined;
-//     }
-    
-// })
 
 function confirmRemove(){
     if( positionTr != undefined ){
-        // deletecars.insertAdjacentHTML("afterbegin",buttontable[positionTr])
-        //deletecars.innerHTML = HTMLTableElement. ("",buttontable[positionTr]);
-        deletecars.innerHTML = buttontable[positionTr];
+        deletecars.innerText ="";
+
+        let contentDelete = JSON.parse( localStorage.getItem( String( storageKey[positionTr-1] ) ) ) ;
+        let keydelete = Object.keys(contentDelete);
+        let valuedelete = Object.values(contentDelete);
+        let table = document.createElement("table");
+        table.classList.add("delete_value","car_table");
+        let tr = document.createElement("tr");
+        let tr2 = document.createElement("tr");
+
+        for (let i = 0; i < keydelete.length; i++) {
+            
+            let td = document.createElement("td");
+            td.appendChild( document.createTextNode( keydelete[i] ) )
+            td.classList.add("td-border");
+            tr.appendChild(td)
+            
+            let td2 = document.createElement("td");
+            td2.classList.add("td-border");
+            td2.appendChild( document.createTextNode( valuedelete[i] ) )
+            tr2.appendChild(td2)
+            
+        }
+
+        table.appendChild(tr)
+        table.appendChild(tr2)
+        deletecars.appendChild(table)
+
     }else{
         deletecars.innerText = "Выберите машину которую хотите удалить"
     }
 }
 
 function removeCar(){
-
     if(positionTr != undefined ){
         localStorage.removeItem( String( storageKey[--positionTr] ) )
-        positionTr = undefined;
         updateTable();
     }
     
 }
 
 function addCar(){
-    console.log("add")
+    newcars = document.getElementsByClassName("js-newcars")
+    let car = {
+        name: String(newcars[0].value),
+        data: newcars[1].value.slice(0,4),
+        broken: Boolean(newcars[2].checked), 
+        price: Number(newcars[3].value)
+    }
+    for (let i = 0; i < newcars.length; i++) {
+        newcars[[i]].value = "";
+        
+    }
+    localStorage.setItem( String( Number(storageKey[(storageKey.sort()).length-1])+1 ) , JSON.stringify(car) );
+    updateTable();
+}
+
+function changeconfirm(){
+    reworkcars = document.getElementsByClassName("js-reworkcars")
+    let remorkcarinfo = Object.values( JSON.parse( localStorage.getItem(storageKey[positionTr-1])));
+    for (let i = 0; i < reworkcars.length; i+=3) {
+        reworkcars[i].value = remorkcarinfo[i]
+    }
+    reworkcars[1].value = remorkcarinfo[1]+"-01-01";
+    reworkcars[2].checked = Boolean(remorkcarinfo[2]);
+
 }
 
 function changeCar(){
-    console.log("change")
+    let changeCars = {
+        name: String(reworkcars[0].value),
+        data: reworkcars[1].value.slice(0,4),
+        broken: Boolean(reworkcars[2].checked), 
+        price: Number(reworkcars[3].value)
+    }
+    localStorage.setItem( String(storageKey[positionTr-1]), JSON.stringify(changeCars))
+    updateTable();
 }
 
 function addrow(obj){
@@ -118,6 +128,22 @@ function addrow(obj){
     }
 
     car_btable.appendChild(tr);
+}
+
+function buttonAction(){
+    for (let i = 1; i < buttontable.length; i++) {
+        
+        buttontable[i].addEventListener("click", (eval) =>{
+            if( positionTr != undefined  & buttontable[positionTr] != undefined ){
+                buttontable[positionTr].classList.remove("action")
+                    
+            }
+
+            positionTr = buttontable.indexOf(eval.path[1])
+            buttontable[positionTr].classList.add("action")
+        })
+
+    }
 }
 
 
@@ -136,4 +162,6 @@ function updateTable(){
         addrow( obj_localstorage[i] );
     }
     storageKey = Object.keys(localStorage);
+    buttontable = [ ...car_btable.querySelectorAll("tr")];
+    buttonAction();
 }

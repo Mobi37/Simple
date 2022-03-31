@@ -14,9 +14,9 @@
         <div class="car_block">
             <div class="btn_table">
 
-                <button type="button" value="addCar" class="btn btn-success" >Добавить</button>
-                <button type="button" value="confirmremove" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Удалить</button>
-                <button type="button" value="changeCar" class="btn btn-primary">Редактировать</button>
+                <button type="button" value="confirmaddCar" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop" >Добавить</button>
+                <button type="button" value="confirmremove" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2">Удалить</button>
+                <button type="button" value="changeconfirm" class="btn btn-primary" data-toggle="modal" data-target="#ChangeCars">Редактировать</button>
  
             </div>
 
@@ -24,21 +24,21 @@
                 <table class="car_table" id="car_info" >
                     <tbody class="car_tbody">
                         <tr class="table_head">
-                            <th>Name</th>
-                            <th>date</th>
-                            <th>broke</th>
+                            <td>Название</td>
+                            <td>Дата производства</td>
+                            <td>Бывала в ДТП</td>
+                            <td>Цена</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Удалить машину</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -47,12 +47,89 @@
           
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" value="removeCar" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+          <button type="button" value="removeCar" class="btn btn-danger" data-dismiss="modal">Удалить</button>
         </div>
       </div>
     </div>
   </div>
+
+
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Добавление машины</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+            <div class="input-group mb-3">
+              <input type="text" class="form-control js-newcars" placeholder="Название" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            
+            <div class="input-group mb-3">
+              <input type="date" class="form-control js-newcars" id="basic-url" aria-describedby="basic-addon3">
+            </div>
+
+            <div class="modal_input-dtp">
+              <div>Участвовала в ДТП: </div>
+              <input class="js-newcars" type="checkbox" name="" id="">
+            </div>
+
+            <div class="input-group mb-3">
+              <input type="number" class="form-control js-newcars" placeholder="Цена в рублях" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            </div>            
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+          <button type="button" value="addCar" class="btn btn-primary" data-dismiss="modal">Добавить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="ChangeCars" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Изменение данных машины</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+            <div class="input-group mb-3">
+              <input type="text" class="form-control js-reworkcars" placeholder="Название" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            
+            <div class="input-group mb-3">
+              <input type="date" class="form-control js-reworkcars" id="basic-url" aria-describedby="basic-addon3">
+            </div>
+
+            <div class="modal_input-dtp">
+              <div>Участвовала в ДТП: </div>
+              <input class="js-reworkcars" type="checkbox" name="" id="">
+            </div>
+
+            <div class="input-group mb-3">
+              <input type="number" class="form-control js-reworkcars" placeholder="Цена в рублях" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            </div>            
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
+          <button type="button" value="changeCar" class="btn btn-primary" data-dismiss="modal">Применить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
 
 
     </main>
