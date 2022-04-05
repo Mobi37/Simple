@@ -15,21 +15,24 @@ async function loadJson(url) {
 }
   
 async function demoGithubUser() {
+  let user;
+  while(true) {
     let name = prompt("Введите логин?", "iliakan");
 
-    try{
-        let user = await loadJson(`https://api.github.com/users/${name}`)
-        alert(`Полное имя: ${user.name}.`);
-        return user;
-    }catch(err){
-        if (err instanceof HttpError && err.response.status == 404) {
-          alert("Такого пользователя не существует, пожалуйста, повторите ввод.");
-          return demoGithubUser();
-        } else {
-          throw err;
-        }
+    try {
+      user = await loadJson(`https://api.github.com/users/${name}`);
+      console.log(user)
+      break; 
+    } catch(err) {
+      if (err instanceof HttpError && err.response.status == 404) {
+        alert("Такого пользователя не существует, пожалуйста, повторите ввод.");
+      } else {
+        throw err;
+      }
     }
+  }
 
+  return user;
 }
   
 demoGithubUser();

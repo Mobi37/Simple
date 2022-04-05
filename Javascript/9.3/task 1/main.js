@@ -1,6 +1,7 @@
 class Rabbit extends Object {
   constructor(name) {
-    super(name);
+    super();
+    this.name = name;
   }
 }
 
