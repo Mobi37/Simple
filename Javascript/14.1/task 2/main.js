@@ -8,5 +8,5 @@ array = new Proxy(array, {
     return Reflect.get(...arguments);
   }
 });
-alert( array[-1] ); // 3
-alert( array[-2] ); // 2
+console.log( array[-1] ); // 3
+console.log( array[-2] ); // 2

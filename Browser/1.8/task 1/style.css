@@ -1,0 +1,8 @@
+.notification{
+    background-color: red;
+    color: yellow;
+    font-size: 20px;
+    position: absolute;
+    width: 52px;
+    height: 25px;
+}
