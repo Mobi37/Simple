@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Document</title>
+    </head>
+    <body>
+        
+      <form name="calculator">
+        <table>
+          <tr>
+            <td>Первоначальный депозит</td>
+            <td>
+              <input name="money" type="number" value="10000" required>
+            </td>
+          </tr>
+          <tr>
+            <td>Срок вклада?</td>
+            <td>
+              <select name="months">
+                <option value="3">3 (минимум)</option>
+                <option value="6">6 (полгода)</option>
+                <option value="12" selected>12 (год)</option>
+                <option value="18">18 (1.5 года)</option>
+                <option value="24">24 (2 года)</option>
+                <option value="30">30 (2.5 года)</option>
+                <option value="36">36 (3 года)</option>
+                <option value="60">60 (5 лет)</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>Годовая процентная ставка?</td>
+            <td>
+              <input name="interest" type="number" value="5" required>
+            </td>
+          </tr>
+        </table>
+
+        <div class="value">
+          <div>
+            было:
+          </div>
+          <div class="prev_value">
+
+          </div>
+
+        </div>
+        <div class="value">
+          <div>
+            Стало:
+          </div>
+          <div class="new_value">
+            
+          </div>
+        </div>
+
+
+        <script src="main.js"></script>
+    </body>
+</html>
