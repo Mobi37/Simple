@@ -1,0 +1,25 @@
+var x = 10;
+var age = 14.1;
+var hello = "hello";
+var isValid = true;
+var isAlive = false;
+var num2 = 100n;
+// Разные системы счисления
+var decimial = 6;
+var hex = 0xf00d;
+var bunary = 10;
+var octal = 484;
+console.log(decimial, hex, bunary, octal);
+var someVar = "hello";
+console.log(someVar);
+someVar = 20;
+console.log(someVar);
+var firstName = "Коксик";
+var surname = "Kiks";
+var ageUser = 10;
+var position = "Good bye world";
+var helloUser = "\u0418\u043C\u044F ".concat(firstName, " \u0424\u0430\u043C\u0438\u043B\u0438\u044F ").concat(surname, " \u0412\u043E\u0437\u0440\u0430\u0441\u0442 ").concat(ageUser, " \u0432\u0437\u0433\u043B\u044F\u0434 \u043D\u0430 \u043C\u0438\u0440 ").concat(position);
+console.log(helloUser);
+console.log(isValid, isAlive);
+console.log(x, age);
+console.log(num2);
