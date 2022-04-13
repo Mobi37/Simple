@@ -21,8 +21,8 @@ console.log(someVar);
 someVar = 20; 
 console.log(someVar);
 
-let firstName: string = "Коксик";
-let surname: string = "Kiks";
+let firstName: string = "jerry";
+let surname: string = "tom";
 let ageUser: number = 10;
 let position: string = "Good bye world"
 let helloUser: string = `Имя ${firstName} Фамилия ${surname} Возраст ${ageUser} взгляд на мир ${position}`;

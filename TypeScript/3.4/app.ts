@@ -42,4 +42,4 @@ printUser(Employee)
 let newUser = buildUser(1, "Jerry", 85);
 printUser(newUser);
 
-Employee.sayWords("Hello World")
+Employee.sayWords!("Hello World")

@@ -43,7 +43,7 @@ console.log(lvupPeson)
 
 
 let massive: readonly number[] = [ 1, 2, 3, 4, 5 ]
-// massive[0] = 0;
+
 
 
 let cortej: [string,number];

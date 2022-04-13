@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "typescript": "^4.6.3",
+    "target": "es2020"
+  }
+}
