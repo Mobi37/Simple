@@ -1,0 +1,22 @@
+<div (click)="changeColor()" [style.color]="classYellow">
+    works {{user.name}} 
+</div>
+
+<input type="text" #colorElement>
+
+<button (click)="changesColor(colorElement.value)">Change color</button>
+
+<button (click)="isShow = !isShow">HiHi</button>
+
+
+
+<ul *ngIf="isShow">
+    <li *ngFor="let user of users">
+        <app-user-card  [user]="user"  (userSelected)="selectedUser = user">
+            <div>hello</div>
+            <section>good day</section>
+        </app-user-card>
+    </li>
+</ul>
+
+<h1> {{selectedUser?.name}} </h1>
