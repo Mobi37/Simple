@@ -1,0 +1,9 @@
+ 
+<div *ngFor="let user of users">
+    {{user.name}}
+    <span (click)="removeUser(user.name)">X</span>
+</div>
+
+    
+<input type="text" #newUser>
+<button (click)="addUser(newUser.value); newUser.value = ''">Добавить пользователя</button>

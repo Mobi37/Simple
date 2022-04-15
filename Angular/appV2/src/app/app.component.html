@@ -1,0 +1,20 @@
+<div appColory #colory="colory">
+   Some text 
+</div>
+
+<button (click)="colory.setRandoColor()">Change Color</button>
+
+<app-item appColory></app-item>
+
+
+<div> 
+  Structural directive
+</div>
+
+<div *ngFor="let delay of [1, 2, 3, 4, 5, 6]">
+  <div *appDelay="delay">
+    <app-item appColory #colory="colory"></app-item>
+    <button (click)="colory.setRandoColor()">Change Color</button>
+  </div>
+
+</div>
