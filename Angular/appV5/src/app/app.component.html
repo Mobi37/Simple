@@ -1,0 +1,12 @@
+
+<a routerLink="" routerLinkActive="active-Link" [routerLinkActiveOptions]="{ exact: true }" >Home</a>
+<a routerLink="users" routerLinkActive="active-Link" [routerLinkActiveOptions]="{ exact: true }" >Users</a>
+<a routerLink="users" [queryParams]="{q: 1111}"  routerLinkActive="active-Link" >Users with queryParams</a>
+<a [routerLink]="['users', userId]" routerLinkActive="active-Link" >User  {{userId}} </a>
+<br/>
+<a [routerLink]="[{ outlets: { popup: 'login' } }]" > Show popup </a>
+<a [routerLink]="[{ outlets: { popup: null } }]" > Hide popup </a>
+
+<router-outlet></router-outlet>
+
+<router-outlet name="popup"></router-outlet>
