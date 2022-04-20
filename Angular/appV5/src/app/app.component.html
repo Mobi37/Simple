@@ -1,6 +1,7 @@
 
 <a routerLink="" routerLinkActive="active-Link" [routerLinkActiveOptions]="{ exact: true }" >Home</a>
 <a routerLink="users" routerLinkActive="active-Link" [routerLinkActiveOptions]="{ exact: true }" >Users</a>
+<a routerLink="admin" routerLinkActive="active-Link" [routerLinkActiveOptions]="{ exact: true }" >Admin</a>
 <a routerLink="users" [queryParams]="{q: 1111}"  routerLinkActive="active-Link" >Users with queryParams</a>
 <a [routerLink]="['users', userId]" routerLinkActive="active-Link" >User  {{userId}} </a>
 <br/>

@@ -12,6 +12,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { AuthGuard } from './auth.guard';
 import { UserResolveService } from './user-resolve.service';
 import { LoginComponent } from './login/login.component';
+import { CustomPreloadingStrategy } from './custom-preloading-strategy';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [AuthGuard, UserResolveService],
+  providers: [AuthGuard, UserResolveService, CustomPreloadingStrategy],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

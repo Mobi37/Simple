@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
+import { CustomPreloadingStrategy } from './custom-preloading-strategy';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -11,6 +12,11 @@ import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
+  { path: "admin", 
+    data: {
+      noreload: true,
+    },
+    loadChildren: () => import("./admin/admin.module").then( (m) => m.AdminModule ) },
   { path: "login", component: LoginComponent, outlet: "popup" },
   { path: "users",
     canActivate: [ AuthGuard ],
@@ -30,7 +36,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: CustomPreloadingStrategy })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
