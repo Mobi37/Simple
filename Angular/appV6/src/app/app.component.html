@@ -20,3 +20,12 @@
 
 </form>
 <button (click)="addUserControl()">Add input</button>
+
+
+<app-traffic [formControl]="trafficControl" ></app-traffic>
+
+<div>
+  <span *ngIf="trafficControl.value === 'green'" >Green</span>
+  <span *ngIf="trafficControl.value === 'yellow'" >Yellow</span>
+  <span *ngIf="trafficControl.value === 'red'" >Red</span>
+</div>

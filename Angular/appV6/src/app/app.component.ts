@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   nameControl: FormControl = new FormControl;
   fullNameControl: FormGroup = new FormGroup({});
   userListControl: FormGroup = new FormGroup({});
+  trafficControl: FormControl = new FormControl;
   userList: any;
 
 
@@ -60,6 +61,12 @@ export class AppComponent implements OnInit {
 
     this.userListControl.valueChanges.subscribe( (value) => console.log(value) );
     this.userList = (this.userListControl.controls["users"] as FormArray);
+
+
+    this.trafficControl = new FormControl();
+
+    this.trafficControl.valueChanges.subscribe((value) => console.log(value));
+
   }
 
   removeUserControl(index: number): void{
