@@ -1,0 +1,16 @@
+
+<div>
+    <button >Добавить</button>
+    <button (click)="onRemoveSelected()" >Удилать</button>
+    <button >Редактировать</button>
+</div>
+
+<ag-grid-angular
+    #agGridCars
+    class="ag-theme-alpine table-cars"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    (selectionChanged)="onSelectionChanged($event)"
+    (gridReady)="onGridReady($event)"
+>
+</ag-grid-angular>

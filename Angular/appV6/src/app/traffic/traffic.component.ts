@@ -18,7 +18,6 @@ export class TrafficComponent implements ControlValueAccessor {
 
   private _colors: TLColor[] = ["red", "yellow", "green"]
   private _currenColor: TLColor = "red";
-  currenColor: TLColor = "red";
   propagateChange = (color: TLColor) => {};
   propagateTouch = (color: TLColor) => {};
 

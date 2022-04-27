@@ -16,7 +16,6 @@ export class DelayDirective implements OnInit {
     ngOnInit(): void {
 
       setTimeout(() => {
-        console.log(this.template);
         this.view.createEmbeddedView(this.template);
       }, this.appDelay * 1000);
 
