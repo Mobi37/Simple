@@ -1,8 +1,8 @@
 
 <div>
-    <button >Добавить</button>
-    <button (click)="onRemoveSelected()" >Удилать</button>
-    <button >Редактировать</button>
+    <button mat-raised-button>Добавить</button>
+    <button mat-raised-button color="warn" (click)="onRemoveSelected()" >Удалить</button>
+    <button mat-raised-button color="primary" >Редактировать</button>
 </div>
 
 <ag-grid-angular
@@ -11,6 +11,5 @@
     [rowData]="rowData"
     [columnDefs]="columnDefs"
     (selectionChanged)="onSelectionChanged($event)"
-    (gridReady)="onGridReady($event)"
 >
 </ag-grid-angular>

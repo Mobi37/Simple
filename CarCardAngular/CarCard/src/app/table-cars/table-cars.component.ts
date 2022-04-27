@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import { ColDef, GridApi, GridReadyEvent, SelectionChangedEvent } from 'ag-grid-community';
+import { ColDef, GridApi, GridReadyEvent, IServerSideDatasource, IServerSideGetRowsParams, SelectionChangedEvent, ValueFormatterParams } from 'ag-grid-community';
+import { Observable } from 'rxjs';
 import { TableCarsService } from './table-cars.service';
 
 
@@ -15,7 +16,6 @@ export class TableCarsComponent implements OnInit {
   @Output() carSelected: EventEmitter<[]> = new EventEmitter();
 
   private selectedRows: any;
-  private gridApi!: GridApi;
 
   constructor(
     private _carService: TableCarsService, 
@@ -24,16 +24,21 @@ export class TableCarsComponent implements OnInit {
   columnDefs: ColDef[] = [
     { headerName: "Производитель", field: 'name', checkboxSelection: true },
     { headerName: "Год выпуска", field: 'yearsIssue' },
-    { headerName: "Участвовала в ДТП", field: 'carAccident' },
+    { headerName: "Участвовала в ДТП", field: 'carAccident', valueFormatter: this.crashCarFormatter },
     { headerName: "Цена", field: 'price'},
   ];
 
-  rowData: any;
+  public rowData: any;
 
   ngOnInit(): void {
-    
-    // this.rowData = this._carService.getAllCars();
+    this.rowData = this._carService.getAllCars();
+  }
 
+  crashCarFormatter(params: ValueFormatterParams){
+    if( params.value == true ){
+      return "Да"
+    }
+    return "Нет"
   }
 
   onSelectionChanged(event: SelectionChangedEvent) {
@@ -47,18 +52,9 @@ export class TableCarsComponent implements OnInit {
     const tx = {
       remove: selectedData,
     };
-    this.agGridCars.api.applyServerSideTransaction(tx);
-    // this._carService.removeCar(this.selectedRows[0].id) 
-    // this.agGridCars.api.applyTransaction( { update: this.rowData } )
-    // const res = this.agGridCars.api.applyTransaction({ remove: selectedData })!;
-    this._carService.consoleAll();
+    this.agGridCars.api.applyTransaction(tx);
+    this._carService.removeCar( selectedData[0] )
+    this._carService.consoleAll()
     
-  }
-
-  onGridReady(params: GridReadyEvent) {
-    this.gridApi = params.api;
-
-      // this._carService.getAllCars()
-      // params.api!.setServerSideDatasource(this._carService.getAllCars());
   }
 }

@@ -9,15 +9,7 @@ import { RowNode } from 'ag-grid-community';
 export class AppComponent implements OnInit {
   title = 'CarCard';
 
-  public selectedCar!: RowNode[];
   ngOnInit(): void {
-    
-    // setInterval( () => {
-    //   if( this.selectedCar !== undefined ){
-    //     console.log( this.selectedCar[0] )
-    //   }
-      
-    // },1000 )
 
   }
 

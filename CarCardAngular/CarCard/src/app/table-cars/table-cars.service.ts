@@ -1,40 +1,39 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 
 @Injectable()
 
-export class TableCarsService {
+export class TableCarsService{
 
 
 
   private Cars: Array<{
+    id: number,
     name: String,
     yearsIssue: Number,
     carAccident: boolean,
     price: Number
   }> = [
-    { name: 'Toyota Celica', yearsIssue: 2011, carAccident: true, price: 35000},
-    { name: 'Ford Mondeo', yearsIssue: 2020, carAccident: false, price: 32000 },
-    { name: 'Porsche Boxster', yearsIssue: 2000, carAccident: true, price: 72000 }
-  ]
+    { id: 0, name: "Porsche Boxter", yearsIssue: 2012, carAccident: true , price: 72000 },
+    { id: 1, name: "Ford Mondeo", yearsIssue: 2013, carAccident: false , price: 32000 },
+    { id: 2, name: "Porsche Boxter", yearsIssue: 2015, carAccident: true , price: 72000 },
+    { id: 3, name: "Toyota Celica", yearsIssue: 2018, carAccident: false , price: 35000 }
+  ];
 
-  constructor(
-    private _http: HttpClient,
-  ) { 
+  constructor() { 
 
   }
 
 
-  public getAllCars(): Array<{ name: String, yearsIssue: Number, carAccident: boolean, price: Number}>{
+  public getAllCars(): Array<{id: number, name: String, yearsIssue: Number, carAccident: boolean, price: Number}>{
     return this.Cars;
   }
 
-  public removeCar( index: number ): void{
-    console.log(this.Cars)
-    console.log(index)
-    this.Cars.splice( index, 1 );
-    console.log(this.Cars)
+  public removeCar( index: {id: number, name: String, yearsIssue: Number, carAccident: boolean, price: Number} ): void{
+    if( this.Cars.indexOf(index) != -1 ){
+      this.Cars.splice( this.Cars.indexOf(index) , 1 )
+    }
   }
 
   public consoleAll(){
