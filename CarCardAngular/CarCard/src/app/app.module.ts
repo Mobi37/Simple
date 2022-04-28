@@ -3,18 +3,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AgGridModule } from 'ag-grid-angular';
 import { HttpClientModule } from '@angular/common/http';
 
+import {MaterialExampleModule} from '../material.module';
 import {MatButtonModule} from '@angular/material/button';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatNativeDateModule} from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TableCarsComponent } from './table-cars/table-cars.component';
+import { TableCarsComponent} from './table-cars/table-cars.component';
 import { TableCarsService } from './table-cars/table-cars.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TableCarsRemoveComponent } from './table-cars/table-cars-remove/table-cars-remove.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableCarsComponent,
+    TableCarsRemoveComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,7 +27,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule ,
     MatButtonModule,
     AgGridModule.withComponents([]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatNativeDateModule,
+    MaterialExampleModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [ TableCarsService ],
   bootstrap: [AppComponent]

@@ -1,9 +1,9 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AgGridAngular } from 'ag-grid-angular';
-import { ColDef, GridApi, GridReadyEvent, IServerSideDatasource, IServerSideGetRowsParams, SelectionChangedEvent, ValueFormatterParams } from 'ag-grid-community';
-import { Observable } from 'rxjs';
+import { ColDef, ValueFormatterParams } from 'ag-grid-community';
+import { TableCarsRemoveComponent } from './table-cars-remove/table-cars-remove.component';
 import { TableCarsService } from './table-cars.service';
-
 
 @Component({
   selector: 'app-table-cars',
@@ -13,13 +13,38 @@ import { TableCarsService } from './table-cars.service';
 export class TableCarsComponent implements OnInit {
   
   @ViewChild('agGridCars') agGridCars!: AgGridAngular;
-  @Output() carSelected: EventEmitter<[]> = new EventEmitter();
-
-  private selectedRows: any;
+  private carName!: string;
+  private carYearsIssue!: number;
+  private carCarAccident!: boolean;
+  private carPrice!: number;
 
   constructor(
     private _carService: TableCarsService, 
+    public dialog: MatDialog,
   ) { }
+
+  openRemoveCar(): void {
+    const dialogRef = this.dialog.open(TableCarsRemoveComponent, {
+      width: '350px',
+      data: { 
+        name: this.carName,
+        yearsIssue: this.carYearsIssue,
+        carAccident: this.carCarAccident,
+        price: this.carPrice
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if( result != undefined && result.name != undefined && result.yearsIssue != undefined && result.carAccident != undefined && result.price != undefined ){
+        this._carService.addCar(result);
+        const addCarData: Array<object> = [ result ];
+        this.agGridCars.api.applyTransaction({ add: addCarData });
+        this._carService.consoleAll();
+      }
+    });
+  }
+
 
   columnDefs: ColDef[] = [
     { headerName: "Производитель", field: 'name', checkboxSelection: true },
@@ -34,17 +59,12 @@ export class TableCarsComponent implements OnInit {
     this.rowData = this._carService.getAllCars();
   }
 
-  crashCarFormatter(params: ValueFormatterParams){
+
+  crashCarFormatter(params: ValueFormatterParams): string{
     if( params.value == true ){
       return "Да"
     }
     return "Нет"
-  }
-
-  onSelectionChanged(event: SelectionChangedEvent) {
-    console.log(event)
-    this.selectedRows = this.agGridCars.api.getSelectedNodes();
-    this.carSelected.emit(this.selectedRows as [])
   }
 
   onRemoveSelected() {

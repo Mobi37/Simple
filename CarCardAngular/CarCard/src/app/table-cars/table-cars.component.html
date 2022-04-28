@@ -1,6 +1,6 @@
 
 <div>
-    <button mat-raised-button>Добавить</button>
+    <button mat-raised-button (click)="openRemoveCar()">Добавить</button>
     <button mat-raised-button color="warn" (click)="onRemoveSelected()" >Удалить</button>
     <button mat-raised-button color="primary" >Редактировать</button>
 </div>
@@ -10,6 +10,5 @@
     class="ag-theme-alpine table-cars"
     [rowData]="rowData"
     [columnDefs]="columnDefs"
-    (selectionChanged)="onSelectionChanged($event)"
 >
 </ag-grid-angular>
