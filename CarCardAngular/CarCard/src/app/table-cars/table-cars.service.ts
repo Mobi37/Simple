@@ -1,16 +1,12 @@
 import { Injectable, OnInit } from '@angular/core';
+import { objectCars } from 'src/data.types';
 
 
 @Injectable()
 
 export class TableCarsService{
 
-  private Cars: Array<{
-    name: String,
-    yearsIssue: Number,
-    carAccident: Boolean,
-    price: Number
-  }> = [
+  private Cars: Array<objectCars> = [
     { name: "Porsche Boxter", yearsIssue: 2012, carAccident: true , price: 72000 },
     { name: "Ford Mondeo", yearsIssue: 2013, carAccident: false , price: 32000 },
     { name: "Porsche Boxter", yearsIssue: 2015, carAccident: true , price: 72000 },
@@ -21,24 +17,23 @@ export class TableCarsService{
 
   }
 
-
-  public getAllCars(): Array<{name: String, yearsIssue: Number, carAccident: Boolean, price: Number}>{
+  public getAllCars(): Array<objectCars>{
     return this.Cars;
   }
 
-  public removeCar( index: {name: String, yearsIssue: Number, carAccident: boolean, price: Number} ): void{
+  public removeCar( index: objectCars ): void{
     const indexCar: number = this.Cars.indexOf(index);
     if( indexCar != -1 ){
       this.Cars.splice( indexCar , 1 )
     }
   }
 
-  public addCar( car: {name: String, yearsIssue: Number, carAccident: boolean, price: Number} ): void{
+  public addCar( car: objectCars ): void{
     this.Cars.push(car)
   }
 
-  public consoleAll(){
-    console.log( this.Cars );
+  public changeCar( oldDataCar: objectCars, newDataCar: objectCars ): void{
+    this.Cars[ this.Cars.indexOf( oldDataCar ) ] = newDataCar;
   }
 
 }

@@ -14,12 +14,16 @@ import { TableCarsComponent} from './table-cars/table-cars.component';
 import { TableCarsService } from './table-cars/table-cars.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableCarsRemoveComponent } from './table-cars/table-cars-remove/table-cars-remove.component';
+import { TableCarsAddComponent } from './table-cars/table-cars-add/table-cars-add.component';
+import { TableCarsChangeComponent } from './table-cars/table-cars-change/table-cars-change.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableCarsComponent,
     TableCarsRemoveComponent,
+    TableCarsAddComponent,
+    TableCarsChangeComponent,
   ],
   imports: [
     BrowserModule,

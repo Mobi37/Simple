@@ -1,7 +1,10 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatDialog } from '@angular/material/dialog';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, ValueFormatterParams } from 'ag-grid-community';
+import { objectCars } from 'src/data.types';
+import { TableCarsAddComponent } from './table-cars-add/table-cars-add.component';
+import { TableCarsChangeComponent } from './table-cars-change/table-cars-change.component';
 import { TableCarsRemoveComponent } from './table-cars-remove/table-cars-remove.component';
 import { TableCarsService } from './table-cars.service';
 
@@ -13,38 +16,8 @@ import { TableCarsService } from './table-cars.service';
 export class TableCarsComponent implements OnInit {
   
   @ViewChild('agGridCars') agGridCars!: AgGridAngular;
-  private carName!: string;
-  private carYearsIssue!: number;
-  private carCarAccident!: boolean;
-  private carPrice!: number;
 
-  constructor(
-    private _carService: TableCarsService, 
-    public dialog: MatDialog,
-  ) { }
-
-  openRemoveCar(): void {
-    const dialogRef = this.dialog.open(TableCarsRemoveComponent, {
-      width: '350px',
-      data: { 
-        name: this.carName,
-        yearsIssue: this.carYearsIssue,
-        carAccident: this.carCarAccident,
-        price: this.carPrice
-      },
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
-      if( result != undefined && result.name != undefined && result.yearsIssue != undefined && result.carAccident != undefined && result.price != undefined ){
-        this._carService.addCar(result);
-        const addCarData: Array<object> = [ result ];
-        this.agGridCars.api.applyTransaction({ add: addCarData });
-        this._carService.consoleAll();
-      }
-    });
-  }
-
+  private carsInfo!: objectCars;
 
   columnDefs: ColDef[] = [
     { headerName: "Производитель", field: 'name', checkboxSelection: true },
@@ -55,26 +28,91 @@ export class TableCarsComponent implements OnInit {
 
   public rowData: any;
 
+  constructor(
+    private _carService: TableCarsService, 
+    public dialog: MatDialog,
+  ) { }
+
+  public openAddCar(): void {
+    
+    const openWindows = this.openDialog( TableCarsAddComponent, this.carsInfo );
+
+    openWindows.afterClosed().subscribe((result: objectCars) => {
+      if( result != undefined && result.name != undefined && result.yearsIssue != undefined && result.carAccident != undefined && result.price != undefined ){
+        this._carService.addCar(result);
+        const addCarData: Array<object> = [ result ];
+        this.agGridCars.api.applyTransaction({ add: addCarData });
+      }
+    });
+  }
+
+  public openRemoveCar(): void {
+    const deleteCars = this.agGridCars.api.getSelectedRows();
+    const openWindows = this.openDialog( TableCarsRemoveComponent, deleteCars[0] )
+
+    openWindows.afterClosed().subscribe( (result: boolean) => {
+      if( result && deleteCars.length != 0 ){
+        this.onRemoveSelected( deleteCars )
+      }
+    });
+  }
+
+  public openChangeCar(){
+    const changeCars = this.agGridCars.api.getSelectedRows();
+    const openWindows = this.openDialog( TableCarsChangeComponent, changeCars[0] )
+
+    openWindows.afterClosed().subscribe( (result: objectCars) => {
+      if( result != undefined ){
+        this.onChangeSelected( changeCars[0], result );
+      }
+
+    });
+  }
+
+  private openDialog( component: any, carsdata: objectCars ): any {
+    return this.dialog.open( component , {
+      data: { 
+        name: carsdata?.name,
+        yearsIssue: carsdata?.yearsIssue,
+        carAccident: carsdata?.carAccident,
+        price: carsdata?.price
+      },
+    });
+    
+  }
+
   ngOnInit(): void {
     this.rowData = this._carService.getAllCars();
   }
 
-
-  crashCarFormatter(params: ValueFormatterParams): string{
+  private crashCarFormatter(params: ValueFormatterParams): string{
     if( params.value == true ){
       return "Да"
     }
     return "Нет"
   }
 
-  onRemoveSelected() {
-    const selectedData = this.agGridCars.api.getSelectedRows();
+  private onRemoveSelected( deleterows: Array<objectCars> ): void {
     const tx = {
-      remove: selectedData,
+      remove: deleterows,
     };
     this.agGridCars.api.applyTransaction(tx);
-    this._carService.removeCar( selectedData[0] )
-    this._carService.consoleAll()
-    
+    this._carService.removeCar( deleterows[0] )
   }
+
+  private onChangeSelected( currentRow: objectCars, newRow: objectCars ): void{
+
+    this._carService.changeCar( currentRow, newRow );
+
+    const itemsToUpdate: any[] = [];
+    this.agGridCars.api.forEachNodeAfterFilterAndSort(function (rowNode, index) {
+      if( rowNode.data == currentRow ){
+        rowNode.data = newRow;
+        itemsToUpdate.push( rowNode.data )
+        return
+      }
+    });
+    this.agGridCars.api.applyTransaction({ update:itemsToUpdate })
+  }
+
 }
