@@ -7,7 +7,6 @@ import { objectCars } from 'src/data.types';
 export class TableCarsService{
 
   private Cars: Array<objectCars> = [
-    { name: "Porsche Boxter", yearsIssue: 2012, carAccident: true , price: 72000 },
     { name: "Ford Mondeo", yearsIssue: 2013, carAccident: false , price: 32000 },
     { name: "Porsche Boxter", yearsIssue: 2015, carAccident: true , price: 72000 },
     { name: "Toyota Celica", yearsIssue: 2018, carAccident: false , price: 35000 }

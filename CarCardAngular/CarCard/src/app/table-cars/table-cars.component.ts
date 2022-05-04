@@ -38,7 +38,7 @@ export class TableCarsComponent implements OnInit {
     const openWindows = this.openDialog( TableCarsAddComponent, this.carsInfo );
 
     openWindows.afterClosed().subscribe((result: objectCars) => {
-      if( result != undefined && result.name != undefined && result.yearsIssue != undefined && result.carAccident != undefined && result.price != undefined ){
+      if( result != undefined ){
         this._carService.addCar(result);
         const addCarData: Array<object> = [ result ];
         this.agGridCars.api.applyTransaction({ add: addCarData });
@@ -93,10 +93,7 @@ export class TableCarsComponent implements OnInit {
   }
 
   private onRemoveSelected( deleterows: Array<objectCars> ): void {
-    const tx = {
-      remove: deleterows,
-    };
-    this.agGridCars.api.applyTransaction(tx);
+    this.agGridCars.api.applyTransaction({ remove: deleterows });
     this._carService.removeCar( deleterows[0] )
   }
 

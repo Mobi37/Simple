@@ -21,7 +21,7 @@ export class TableCarsAddComponent{
   ) {}
 
   public onNoClick(): void {
-    this.dialogRef.close(this.data);
+    this.dialogRef.close();
   }
 
 }
