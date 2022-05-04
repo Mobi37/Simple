@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { RowNode } from 'ag-grid-community';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
