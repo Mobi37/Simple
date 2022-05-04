@@ -28,8 +28,7 @@ export class TableCarsRemoveComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const arrrayData = [ this.data ]
-    this.rowData = arrrayData;
+    this.rowData = [ this.data ];
   }
 
    private crashCarFormatter(params: ValueFormatterParams): string{

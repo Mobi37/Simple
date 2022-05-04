@@ -40,8 +40,7 @@ export class TableCarsComponent implements OnInit {
     openWindows.afterClosed().subscribe((result: objectCars) => {
       if( result != undefined ){
         this._carService.addCar(result);
-        const addCarData: Array<object> = [ result ];
-        this.agGridCars.api.applyTransaction({ add: addCarData });
+        this.agGridCars.api.applyTransaction({ add: [ result ] });
       }
     });
   }
