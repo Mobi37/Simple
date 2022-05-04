@@ -4,10 +4,3 @@ export type objectCars = {
     carAccident: boolean,
     price: number,
 }
-export interface DialogDataCars {
-    name: string;
-    yearsIssue: Number;
-    carAccident: boolean;
-    price: Number;
-}
-  

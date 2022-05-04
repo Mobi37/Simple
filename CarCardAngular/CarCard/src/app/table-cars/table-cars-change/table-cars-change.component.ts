@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { range } from 'rxjs';
-import { DialogDataCars } from 'src/data.types';
+import { objectCars } from 'src/data.types';
 
 @Component({
   selector: 'app-table-cars-change',
@@ -17,7 +17,7 @@ export class TableCarsChangeComponent{
 
   constructor(
     public dialogRef: MatDialogRef<TableCarsChangeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogDataCars,
+    @Inject(MAT_DIALOG_DATA) public data: objectCars,
   ) {}
 
   public onNoClick(): void {

@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ColDef, ValueFormatterParams } from 'ag-grid-community';
-import { DialogDataCars } from 'src/data.types';
+import { objectCars } from 'src/data.types';
 
 @Component({
   selector: 'app-table-cars-remove',
@@ -12,7 +12,7 @@ export class TableCarsRemoveComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<TableCarsRemoveComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogDataCars,
+    @Inject(MAT_DIALOG_DATA) public data: objectCars,
   ) {}
 
   columnDefs: ColDef[] = [
