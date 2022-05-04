@@ -13,6 +13,11 @@
         flex-direction: column;  
     }
 
+    &__message{
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
     &__checkbox{
         font-size: 15px;
         margin-bottom: 15px;
