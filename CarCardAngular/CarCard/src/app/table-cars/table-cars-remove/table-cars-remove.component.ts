@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ColDef, ValueFormatterParams } from 'ag-grid-community';
 import { objectCars } from 'src/data.types';
 
 @Component({
@@ -15,27 +14,11 @@ export class TableCarsRemoveComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: objectCars,
   ) {}
 
-  columnDefs: ColDef[] = [
-    { headerName: "Производитель", field: 'name', width: 150},
-    { headerName: "Год выпуска", field: 'yearsIssue', width: 130 },
-    { headerName: "Участвовала в ДТП", field: 'carAccident', valueFormatter: this.crashCarFormatter, width: 180 },
-    { headerName: "Цена", field: 'price', width: 100},
-  ];
-  public rowData: any;
-
   public onNoClick(): void {
     this.dialogRef.close(false);
   }
 
   ngOnInit(): void {
-    this.rowData = [ this.data ];
-  }
 
-   private crashCarFormatter(params: ValueFormatterParams): string{
-    if( params.value == true ){
-      return "Да"
-    }
-    return "Нет"
   }
-
 }

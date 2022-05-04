@@ -2,19 +2,9 @@
     <div class="Remove-cars__Title-popup">Удалить машину</div>
     <div class="Remove-cars__remove-content">
 
-
-        <div class="Remove-cars__message" *ngIf="data.name == undefined" >
-            Выберите машину которую хотите удалить
+        <div class="Remove-cars__remove-text">
+            Вы действительно хотите удалить {{data.name}}
         </div>
-
-        <ag-grid-angular
-        #agGridCars
-        *ngIf="data.name != undefined"
-        class="ag-theme-alpine Remove-cars__ag-grid"
-        [rowData]="rowData"
-        [columnDefs]="columnDefs"
-        >
-        </ag-grid-angular>
 
         <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial>Удалить</button>
         <button mat-button (click)="onNoClick()">Отмена</button>

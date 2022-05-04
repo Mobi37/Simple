@@ -1,8 +1,8 @@
 
 <div>
     <button mat-raised-button (click)="openAddCar()">Добавить</button>
-    <button mat-raised-button color="warn" (click)="openRemoveCar()" >Удалить</button>
-    <button mat-raised-button color="primary" (click)="openChangeCar()" >Редактировать</button>
+    <button mat-raised-button color="warn"  [disabled]="checkActionButton" (click)="openRemoveCar()" >Удалить</button>
+    <button mat-raised-button color="primary" [disabled]="checkActionButton" (click)="openChangeCar()" >Редактировать</button>
 </div>
 
 <ag-grid-angular
@@ -10,5 +10,7 @@
     class="ag-theme-alpine table-cars"
     [rowData]="rowData"
     [columnDefs]="columnDefs"
+    [rowSelection]="'single'"
+    (selectionChanged)="checkSelectedRows()"
 >
 </ag-grid-angular>

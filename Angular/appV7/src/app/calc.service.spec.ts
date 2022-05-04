@@ -23,8 +23,8 @@ describe('CalcService', () => {
     service.sumAsync(1, 1).then( result => {
       expect(result).toBe(2);
     } )
-    tick(3000);
-    // flush();
+    // tick(3000);
+    flush();
 
   }));
 });

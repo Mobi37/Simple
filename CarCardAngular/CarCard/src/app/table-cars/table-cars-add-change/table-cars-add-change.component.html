@@ -1,0 +1,34 @@
+<div class="AddWindows" [formGroup]="carsDataControl">
+    <div class="AddWindows__Title-popup" [ngSwitch]="data.name">
+        <div *ngSwitchCase="">Добавить машину</div>
+        <div *ngSwitchDefault>Изменить машину</div>
+    </div>
+    <div class="AddWindows__Create-car">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Название машины и модель</mat-label>
+            <input formControlName="name" matInput >
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Дата производства</mat-label>
+            <mat-select formControlName="yearsIssue">
+            <mat-option *ngFor="let year of years" [value]="year">
+                {{year}}
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="AddWindows__checkbox">
+            <input type="checkbox" formControlName="carAccident" id="broken"> <label for="broken">Участвовала в ДТП</label>
+        </div>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Стоимость</mat-label>
+            <input formControlName="price" class="AddWindows__price-input" type="number" matInput >
+        </mat-form-field>
+        
+        <button mat-raised-button (click)="onYesClick()" [disabled]="checkValidButton">Добавить</button>
+        <button mat-button [mat-dialog-close]="">Отмена</button>
+        
+    </div>
+</div>
+

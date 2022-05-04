@@ -1,26 +1,14 @@
 
 .Remove-cars{
 
-    width: 562px;
 
     &__Title-popup{
         font-size: 18px;
         margin-bottom: 15px;
     }
-    &__message{
-        font-size: 16px;
-        margin-bottom: 15px;
-    }
 
-    &__remove-content{
-        display: flex;
-        flex-direction: column;
-    }
-
-    &__ag-grid{
-        width: auto;
-        height: 93px;
-        overflow:hidden;
+    &__remove-text{
+        font-size: 15px;
         margin-bottom: 15px;
     }
 }

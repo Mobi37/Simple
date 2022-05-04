@@ -1,10 +1,10 @@
+import { ComponentType } from '@angular/cdk/portal';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatDialog } from '@angular/material/dialog';
+import {MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, ValueFormatterParams } from 'ag-grid-community';
 import { objectCars } from 'src/data.types';
-import { TableCarsAddComponent } from './table-cars-add/table-cars-add.component';
-import { TableCarsChangeComponent } from './table-cars-change/table-cars-change.component';
+import { TableCarsAddChangeComponent } from './table-cars-add-change/table-cars-add-change.component';
 import { TableCarsRemoveComponent } from './table-cars-remove/table-cars-remove.component';
 import { TableCarsService } from './table-cars.service';
 
@@ -18,15 +18,16 @@ export class TableCarsComponent implements OnInit {
   @ViewChild('agGridCars') agGridCars!: AgGridAngular;
 
   private carsInfo!: objectCars;
+  public checkActionButton: boolean = true;
 
-  columnDefs: ColDef[] = [
+  public columnDefs: ColDef[] = [
     { headerName: "Производитель", field: 'name', checkboxSelection: true },
     { headerName: "Год выпуска", field: 'yearsIssue' },
     { headerName: "Участвовала в ДТП", field: 'carAccident', valueFormatter: this.crashCarFormatter },
     { headerName: "Цена", field: 'price'},
   ];
 
-  public rowData: any;
+  public rowData!: Array<objectCars>;
 
   constructor(
     private _carService: TableCarsService, 
@@ -35,10 +36,10 @@ export class TableCarsComponent implements OnInit {
 
   public openAddCar(): void {
     
-    const openWindows = this.openDialog( TableCarsAddComponent, this.carsInfo );
+    const openWindows = this.openDialog( TableCarsAddChangeComponent, this.carsInfo );
 
     openWindows.afterClosed().subscribe((result: objectCars) => {
-      if( result != undefined ){
+      if( result != null ){
         this._carService.addCar(result);
         this.agGridCars.api.applyTransaction({ add: [ result ] });
       }
@@ -58,23 +59,22 @@ export class TableCarsComponent implements OnInit {
 
   public openChangeCar(){
     const changeCars = this.agGridCars.api.getSelectedRows();
-    const openWindows = this.openDialog( TableCarsChangeComponent, changeCars[0] )
-
+    const openWindows = this.openDialog( TableCarsAddChangeComponent, changeCars[0] )
     openWindows.afterClosed().subscribe( (result: objectCars) => {
-      if( result != undefined ){
+      if( result != null ){
         this.onChangeSelected( changeCars[0], result );
       }
 
     });
   }
 
-  private openDialog( component: any, carsdata: objectCars ): any {
+  private openDialog( component: ComponentType<object>, carsData: objectCars ): MatDialogRef<object> {
     return this.dialog.open( component , {
       data: { 
-        name: carsdata?.name,
-        yearsIssue: carsdata?.yearsIssue,
-        carAccident: carsdata?.carAccident,
-        price: carsdata?.price
+        name: carsData?.name,
+        yearsIssue: carsData?.yearsIssue,
+        carAccident: carsData?.carAccident,
+        price: carsData?.price
       },
     });
     
@@ -85,23 +85,20 @@ export class TableCarsComponent implements OnInit {
   }
 
   private crashCarFormatter(params: ValueFormatterParams): string{
-    if( params.value == true ){
-      return "Да"
-    }
-    return "Нет"
+    return params.value == true ? "Да" : "Нет"
   }
 
-  private onRemoveSelected( deleterows: Array<objectCars> ): void {
-    this.agGridCars.api.applyTransaction({ remove: deleterows });
-    this._carService.removeCar( deleterows[0] )
+  private onRemoveSelected( deleteRows: Array<objectCars> ): void {
+    this.agGridCars.api.applyTransaction({ remove: deleteRows });
+    this._carService.removeCar( deleteRows[0] )
   }
 
   private onChangeSelected( currentRow: objectCars, newRow: objectCars ): void{
 
     this._carService.changeCar( currentRow, newRow );
 
-    const itemsToUpdate: any[] = [];
-    this.agGridCars.api.forEachNodeAfterFilterAndSort(function (rowNode, index) {
+    const itemsToUpdate: objectCars[] = [];
+    this.agGridCars.api.forEachNodeAfterFilterAndSort((rowNode, index) => {
       if( rowNode.data == currentRow ){
         rowNode.data = newRow;
         itemsToUpdate.push( rowNode.data )
@@ -111,4 +108,7 @@ export class TableCarsComponent implements OnInit {
     this.agGridCars.api.applyTransaction({ update:itemsToUpdate })
   }
 
+  public checkSelectedRows(): void{
+    this.agGridCars.api.getSelectedRows().length == 1 ? this.checkActionButton = false : this.checkActionButton = true
+  }
 }
