@@ -48,18 +48,18 @@ export class TableCarsComponent implements OnInit {
 
   public openRemoveCar(): void {
     const deleteCars = this.agGridCars.api.getSelectedRows();
-    const openWindows = this.openDialog( TableCarsRemoveComponent, deleteCars[0] )
+    const openWindows = this.openDialog( TableCarsRemoveComponent, deleteCars[0] );
 
     openWindows.afterClosed().subscribe( (result: boolean) => {
       if( result && deleteCars.length != 0 ){
-        this.onRemoveSelected( deleteCars )
+        this.onRemoveSelected( deleteCars );
       }
     });
   }
 
   public openChangeCar(){
     const changeCars = this.agGridCars.api.getSelectedRows();
-    const openWindows = this.openDialog( TableCarsAddChangeComponent, changeCars[0] )
+    const openWindows = this.openDialog( TableCarsAddChangeComponent, changeCars[0] );
     openWindows.afterClosed().subscribe( (result: objectCars) => {
       if( result != null ){
         this.onChangeSelected( changeCars[0], result );
@@ -85,12 +85,12 @@ export class TableCarsComponent implements OnInit {
   }
 
   private crashCarFormatter(params: ValueFormatterParams): string{
-    return params.value == true ? "Да" : "Нет"
+    return params.value == true ? "Да" : "Нет";
   }
 
   private onRemoveSelected( deleteRows: Array<objectCars> ): void {
     this.agGridCars.api.applyTransaction({ remove: deleteRows });
-    this._carService.removeCar( deleteRows[0] )
+    this._carService.removeCar( deleteRows[0] );
   }
 
   private onChangeSelected( currentRow: objectCars, newRow: objectCars ): void{
@@ -101,14 +101,14 @@ export class TableCarsComponent implements OnInit {
     this.agGridCars.api.forEachNodeAfterFilterAndSort((rowNode, index) => {
       if( rowNode.data == currentRow ){
         rowNode.data = newRow;
-        itemsToUpdate.push( rowNode.data )
-        return
+        itemsToUpdate.push( rowNode.data );
+        return;
       }
     });
-    this.agGridCars.api.applyTransaction({ update:itemsToUpdate })
+    this.agGridCars.api.applyTransaction({ update:itemsToUpdate });
   }
 
   public checkSelectedRows(): void{
-    this.agGridCars.api.getSelectedRows().length == 1 ? this.checkActionButton = false : this.checkActionButton = true
+    this.agGridCars.api.getSelectedRows().length == 1 ? this.checkActionButton = false : this.checkActionButton = true;
   }
 }

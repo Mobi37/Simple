@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { objectCars } from 'src/data.types';
 
@@ -7,7 +7,7 @@ import { objectCars } from 'src/data.types';
   templateUrl: './table-cars-remove.component.html',
   styleUrls: ['./table-cars-remove.component.scss']
 })
-export class TableCarsRemoveComponent implements OnInit {
+export class TableCarsRemoveComponent{
 
   constructor(
     public dialogRef: MatDialogRef<TableCarsRemoveComponent>,
@@ -16,9 +16,5 @@ export class TableCarsRemoveComponent implements OnInit {
 
   public onNoClick(): void {
     this.dialogRef.close(false);
-  }
-
-  ngOnInit(): void {
-
   }
 }

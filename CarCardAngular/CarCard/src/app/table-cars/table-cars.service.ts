@@ -23,12 +23,12 @@ export class TableCarsService{
   public removeCar( index: objectCars ): void{
     const indexCar: number = this.Cars.indexOf(index);
     if( indexCar != -1 ){
-      this.Cars.splice( indexCar , 1 )
+      this.Cars.splice( indexCar , 1 );
     }
   }
 
   public addCar( car: objectCars ): void{
-    this.Cars.push(car)
+    this.Cars.push(car);
   }
 
   public changeCar( oldDataCar: objectCars, newDataCar: objectCars ): void{

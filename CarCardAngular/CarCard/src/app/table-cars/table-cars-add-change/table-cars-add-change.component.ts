@@ -27,8 +27,8 @@ export class TableCarsAddChangeComponent implements OnInit {
   }
   ngOnInit(): void {
     this.rangeYears.subscribe( ( value ) =>{
-      this.years.push(value)
-    } )
+      this.years.push(value);
+    } );
 
 
     this.carsDataControl = new FormGroup({
@@ -36,22 +36,22 @@ export class TableCarsAddChangeComponent implements OnInit {
       yearsIssue: new FormControl( this.data.yearsIssue, [ Validators.required ] ),
       carAccident: new FormControl( this.data.carAccident ),
       price: new FormControl( this.data.price, [ Validators.required, this.validatePriceCar ] ),
-    })
+    });
 
     this.carsDataControl.valueChanges.subscribe( (value) => {
       this.data = value
-    } )
+    } );
     this.carsDataControl.statusChanges.subscribe( (status) => {
       status == "VALID" ? this.checkValidButton = false : this.checkValidButton = true;
-    } )
+    } );
 
   }
 
   private validatePriceCar( control: AbstractControl ): ValidationErrors | null {
     if( control.value < 0 ){
-      return { ["message"]: "Price must be more 0" }
+      return { ["message"]: "Price must be more 0" };
     }
-    return null
+    return null;
   } 
 
 }
