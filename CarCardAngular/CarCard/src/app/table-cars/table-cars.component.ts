@@ -36,7 +36,7 @@ export class TableCarsComponent implements OnInit {
 
   public openAddCar(): void {
     
-    const openWindows = this.openDialog( TableCarsAddChangeComponent, this.carsInfo );
+    const openWindows: MatDialogRef<object> = this.openDialog( TableCarsAddChangeComponent, this.carsInfo );
 
     openWindows.afterClosed().subscribe((result: objectCars) => {
       if( result != null ){
@@ -47,8 +47,8 @@ export class TableCarsComponent implements OnInit {
   }
 
   public openRemoveCar(): void {
-    const deleteCars = this.agGridCars.api.getSelectedRows();
-    const openWindows = this.openDialog( TableCarsRemoveComponent, deleteCars[0] );
+    const deleteCars: objectCars[] = this.agGridCars.api.getSelectedRows();
+    const openWindows: MatDialogRef<object> = this.openDialog( TableCarsRemoveComponent, deleteCars[0] );
 
     openWindows.afterClosed().subscribe( (result: boolean) => {
       if( result && deleteCars.length != 0 ){
@@ -58,8 +58,8 @@ export class TableCarsComponent implements OnInit {
   }
 
   public openChangeCar(){
-    const changeCars = this.agGridCars.api.getSelectedRows();
-    const openWindows = this.openDialog( TableCarsAddChangeComponent, changeCars[0] );
+    const changeCars: objectCars[] = this.agGridCars.api.getSelectedRows();
+    const openWindows: MatDialogRef<object> = this.openDialog( TableCarsAddChangeComponent, changeCars[0] );
     openWindows.afterClosed().subscribe( (result: objectCars) => {
       if( result != null ){
         this.onChangeSelected( changeCars[0], result );
